@@ -192,6 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
       element.classList.add("is-visible");
     };
 
+    // Show hero immediately (no delay)
+    const heroContent = document.querySelector(".hero__content[data-animate]");
+    if (heroContent) {
+      reveal(heroContent);
+    }
+
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
         (entries, obs) => {
@@ -203,12 +209,17 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         },
         {
-          threshold: 0.16,
-          rootMargin: "0px 0px -64px 0px",
+          threshold: 0.05, // Trigger earlier (5% visible instead of 16%)
+          rootMargin: "0px 0px 100px 0px", // Start animating 100px before element enters viewport
         }
       );
 
-      animateElements.forEach((element) => observer.observe(element));
+      animateElements.forEach((element) => {
+        // Don't observe hero content again (already shown)
+        if (element !== heroContent) {
+          observer.observe(element);
+        }
+      });
     } else {
       animateElements.forEach(reveal);
     }

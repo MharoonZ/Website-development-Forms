@@ -443,8 +443,8 @@ body {
 
 [data-animate] {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 600ms ease, transform 600ms ease;
+  transform: translateY(24px);
+  transition: opacity 350ms ease-out, transform 350ms ease-out;
   transition-delay: var(--delay, 0ms);
   will-change: opacity, transform;
 }

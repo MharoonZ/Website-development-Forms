@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Configuration: Replace with your actual URLs
   const CONFIG = {
-    formspreeMembershipId: "YOUR-FORM-ID", // Replace with your Formspree form ID
+    formspreeMembershipId: "mrbrbgjk", // Replace with your Formspree form ID
     googleSheetsUrl: "YOUR-GOOGLE-APPS-SCRIPT-URL", // Replace with your Google Apps Script web app URL
-    formspreeContactId: "movyvqdv", // Replace with your Formspree contact form ID
+    formspreeContactId: "mpwkwzbw", // Replace with your Formspree contact form ID
   };
 
   // Helper: Convert FormData to object and handle checkboxes

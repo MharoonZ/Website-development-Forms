@@ -1,14 +1,14 @@
 :root {
-  --color-forest: #043d2d;
-  --color-canopy: #0f6843;
-  --color-fern: #1f7c52;
-  --color-lime: #75d8a0;
-  --color-gold: #d8f29b;
-  --color-cream: #edf5ef;
-  --color-charcoal: #13221b;
-  --color-slate: #2c483c;
-  --color-cloud: rgba(236, 246, 239, 0.92);
-  --color-shadow: rgba(4, 61, 45, 0.16);
+  --color-forest: #022015;
+  --color-canopy: #264b35;
+  --color-fern: #46684b;
+  --color-lime: #a6cf7d;
+  --color-gold: #e2c99a;
+  --color-cream: #f3efe7;
+  --color-charcoal: #111312;
+  --color-slate: #8ea191;
+  --color-cloud: rgba(28, 43, 34, 0.86);
+  --color-shadow: rgba(0, 0, 0, 0.38);
 
   --font-display: "Playfair Display", serif;
   --font-body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
@@ -33,19 +33,23 @@
 body {
   margin: 0;
   font-family: var(--font-body);
-  color: var(--color-charcoal);
-  background: linear-gradient(160deg, rgba(4, 61, 45, 0.12), rgba(31, 124, 82, 0.08)),
-    var(--color-cream);
+  color: var(--color-cream);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(0, 0, 0, 0.45), transparent 55%),
+    radial-gradient(circle at 100% 60%, rgba(0, 0, 0, 0.6), transparent 55%),
+    #020907;
   line-height: 1.6;
   position: relative;
+  min-height: 100vh;
 }
 
 .page-gradient {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(31, 124, 82, 0.36), transparent 55%),
-    radial-gradient(circle at 80% 10%, rgba(117, 216, 160, 0.28), transparent 52%),
-    radial-gradient(circle at 50% 80%, rgba(4, 61, 45, 0.28), transparent 65%);
+  background:
+    linear-gradient(140deg, rgba(2, 32, 21, 0.9), rgba(10, 48, 32, 0.75)),
+    url("./assets/su-san-lee-g3PyXO4A0yc-unsplash.jpg") center/cover no-repeat;
+  filter: saturate(1.15);
   z-index: -2;
 }
 
@@ -54,18 +58,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-md) calc(var(--spacing-xl) * 1.3);
   position: relative;
-  background: linear-gradient(130deg, rgba(4, 61, 45, 0.88), rgba(31, 124, 82, 0.58)),
-    url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2400&q=80") center/cover no-repeat;
-  color: white;
+  color: var(--color-cream);
 }
 
-.hero::after {
-  content: "";
+.hero__overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(160deg, rgba(4, 61, 45, 0.88), rgba(31, 124, 82, 0.6));
+  inset: 2.5rem 1.25rem auto;
+  height: clamp(420px, 70vh, 560px);
+  border-radius: 40px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.12), transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(166, 207, 125, 0.22), transparent 60%),
+    rgba(9, 38, 26, 0.82);
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(26px);
   z-index: -1;
 }
 
@@ -74,11 +84,46 @@ body {
   text-align: center;
   display: grid;
   gap: var(--spacing-md);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-lg);
-  background: rgba(4, 61, 45, 0.52);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+  padding: var(--spacing-lg) var(--spacing-lg) calc(var(--spacing-lg) * 1.2);
+  border-radius: 32px;
+  background: radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.12), transparent 55%),
+    radial-gradient(circle at 100% 30%, rgba(226, 201, 154, 0.18), transparent 60%),
+    rgba(6, 30, 20, 0.86);
+  backdrop-filter: blur(24px);
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.hero__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 0.45rem;
+  border-radius: 999px;
+  background: rgba(9, 38, 26, 0.72);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+.hero__pill {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.18), transparent 55%);
+  backdrop-filter: blur(14px);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.hero__pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.45);
 }
 
 .hero__tagline {
@@ -117,10 +162,28 @@ body {
 
 .section {
   width: min(100%, calc(var(--max-width) + 2 * var(--spacing-md)));
-  margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
+  margin: -2.5rem auto 0;
+  padding: calc(var(--spacing-xl) * 1.1) var(--spacing-md) var(--spacing-xl);
   position: relative;
   z-index: 1;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.12), transparent 55%),
+    radial-gradient(circle at 100% 0, rgba(226, 201, 154, 0.16), transparent 55%),
+    rgba(7, 24, 16, 0.9);
+  box-shadow:
+    0 36px 80px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Layout variations for sections */
+
+/* Put "Why ARBA" content and cards side by side on larger screens */
+.section--why {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: var(--spacing-xl);
+  align-items: start;
 }
 
 .section__header,
@@ -134,7 +197,8 @@ body {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(2rem, 3vw, 2.5rem);
-  color: var(--color-forest);
+  /* Use warm accent color so section headings like "Why ARBA" are clearly visible */
+  color: #FF8559;
   margin: 0;
 }
 
@@ -150,19 +214,21 @@ body {
 }
 
 .card {
-  background: linear-gradient(145deg, rgba(236, 246, 239, 0.98), rgba(209, 235, 219, 0.92));
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.12), transparent 60%),
+    rgba(13, 39, 26, 0.9);
   padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 45px rgba(4, 61, 45, 0.18);
-  border: 1px solid rgba(117, 216, 160, 0.25);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
 }
 
 .card__title {
   font-family: var(--font-display);
   font-size: 1.4rem;
   margin-top: 0;
-  color: var(--color-forest);
+  /* Match card titles (e.g. "Our Mission") to the main heading accent color */
+  color: #FF8559;
 }
 
 .grid {
@@ -173,23 +239,28 @@ body {
 
 .tile {
   padding: var(--spacing-lg);
-  background: linear-gradient(160deg, rgba(209, 235, 219, 0.95), rgba(236, 246, 239, 0.92));
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.18), transparent 55%),
+    rgba(15, 39, 27, 0.92);
   border-radius: var(--radius-md);
-  border: 1px solid rgba(4, 61, 45, 0.1);
-  box-shadow: 0 14px 35px var(--color-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
 .tile:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 50px rgba(4, 61, 45, 0.24);
-  background: linear-gradient(160deg, rgba(209, 235, 219, 0.98), rgba(184, 226, 202, 0.96));
+  box-shadow: 0 26px 55px rgba(0, 0, 0, 0.85);
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.24), transparent 55%),
+    rgba(18, 48, 32, 0.96);
 }
 
 .tile h3 {
   font-family: var(--font-display);
   margin-top: 0;
-  color: var(--color-forest);
+  /* Ensure tile headings are also clearly visible and consistent */
+  color: #FF8559;
 }
 
 .section__cta {
@@ -236,38 +307,31 @@ body {
 }
 
 .tile--benefit {
-  background: linear-gradient(160deg, rgba(209, 235, 219, 0.96), rgba(236, 246, 239, 0.94));
-  border: 1px solid rgba(31, 124, 82, 0.15);
-}
-
-.section--why {
-  background: radial-gradient(circle at top right, rgba(117, 216, 160, 0.12), transparent 55%);
-}
-
-.section--grid {
-  background: radial-gradient(circle at top left, rgba(4, 61, 45, 0.12), transparent 58%);
-}
-
-.section--split {
-  background: radial-gradient(circle at bottom right, rgba(31, 124, 82, 0.14), transparent 50%);
-}
-
-.section--benefits {
-  background: radial-gradient(circle at top right, rgba(117, 216, 160, 0.16), transparent 60%);
+  /* Use the same style as other tiles so Member Benefits boxes are not white before hover */
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.18), transparent 55%),
+    rgba(15, 39, 27, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .section--cta {
-  background: linear-gradient(135deg, rgba(4, 61, 45, 0.12), rgba(117, 216, 160, 0.32));
-  border-radius: var(--radius-lg);
-  box-shadow: 0 30px 48px rgba(4, 61, 45, 0.22);
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.12), transparent 55%),
+    radial-gradient(circle at 100% 0, rgba(166, 207, 125, 0.18), transparent 55%),
+    rgba(7, 24, 16, 0.96);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .form-wrapper {
-  background: linear-gradient(165deg, rgba(236, 246, 239, 0.96), rgba(209, 235, 219, 0.92));
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.12), transparent 60%),
+    rgba(10, 30, 20, 0.9);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  box-shadow: 0 22px 45px rgba(4, 61, 45, 0.2);
-  border: 1px solid rgba(117, 216, 160, 0.24);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .form {
@@ -287,7 +351,7 @@ body {
 
 .form__group label {
   font-weight: 500;
-  color: var(--color-forest);
+  color: var(--color-cream);
 }
 
 .form__group input,
@@ -295,19 +359,20 @@ body {
 .form__group select {
   padding: 0.85rem 1rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(4, 61, 45, 0.22);
-  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(3, 9, 6, 0.7);
   font-family: inherit;
   font-size: 1rem;
   transition: border-color var(--transition), box-shadow var(--transition);
+  color: var(--color-cream);
 }
 
 .form__group input:focus,
 .form__group textarea:focus,
 .form__group select:focus {
   outline: none;
-  border-color: var(--color-canopy);
-  box-shadow: 0 0 0 4px rgba(117, 216, 160, 0.28);
+  border-color: var(--color-lime);
+  box-shadow: 0 0 0 3px rgba(166, 207, 125, 0.4);
 }
 
 .form__options {
@@ -362,9 +427,10 @@ body {
 }
 
 .button--primary {
-  background: linear-gradient(135deg, var(--color-lime), var(--color-canopy));
-  color: var(--color-forest);
-  box-shadow: 0 14px 30px rgba(117, 216, 160, 0.45);
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.25), transparent 55%),
+    linear-gradient(130deg, var(--color-lime), var(--color-gold));
+  color: #111312;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.7);
 }
 
 .button--primary:hover {
@@ -373,9 +439,9 @@ body {
 }
 
 .button--ghost {
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  color: white;
+  background: rgba(3, 9, 6, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .button--ghost:hover {
@@ -383,10 +449,10 @@ body {
 }
 
 .button--outline {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--color-canopy);
-  color: var(--color-canopy);
-  box-shadow: 0 12px 25px rgba(4, 61, 45, 0.16);
+  background: rgba(3, 9, 6, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.75);
 }
 
 .button--outline:hover {
@@ -405,9 +471,9 @@ body {
 }
 
 .section--contact {
-  background: linear-gradient(150deg, rgba(4, 61, 45, 0.12), rgba(236, 246, 239, 0.9));
-  border-radius: var(--radius-lg);
-  box-shadow: 0 26px 50px rgba(4, 61, 45, 0.2);
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.12), transparent 55%),
+    rgba(6, 22, 15, 0.95);
 }
 
 .footer {
@@ -463,12 +529,48 @@ body {
     padding: var(--spacing-md);
   }
 
+  .hero__nav {
+    flex-wrap: wrap;
+  }
+
+  .hero__pill {
+    width: calc(50% - 0.5rem);
+    justify-content: center;
+  }
+
   .section {
+    margin: var(--spacing-lg) auto 0;
     padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  /* Stack side‑by‑side sections on small screens */
+  .section--why {
+    display: block;
+  }
+
+  .section__cards,
+  .section__columns {
+    gap: var(--spacing-md);
+  }
+
+  .hero__meta {
+    flex-direction: column;
   }
 
   .form-wrapper {
     padding: var(--spacing-md);
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .hero__cta {
+    gap: 0.75rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
 

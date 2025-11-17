@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Configuration: Replace with your actual URLs
   const CONFIG = {
     formspreeMembershipId: "mrbrbgjk", // Replace with your Formspree form ID
-    googleSheetsUrl: "YOUR-GOOGLE-APPS-SCRIPT-URL", // Replace with your Google Apps Script web app URL
+    googleSheetsUrl: "https://script.google.com/macros/s/AKfycbzfJJMJSXYCQk6JZ_MHWg580wDws_YJ9oev4-UJ67RcoPlTabOpztDoFbakwQtXexMxHQ/exec", // Replace with your Google Apps Script web app URL
     formspreeContactId: "mpwkwzbw", // Replace with your Formspree contact form ID
   };
 
@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
+      console.log("Submitting to Google Sheets:", data);
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -53,13 +54,36 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(data),
       });
 
+      const responseText = await response.text();
+      console.log("Google Sheets response:", responseText);
+
       if (!response.ok) {
-        throw new Error("Google Sheets submission failed");
+        throw new Error(`Google Sheets submission failed: ${response.status} ${response.statusText}`);
       }
 
-      return { success: true };
+      // Try to parse JSON response
+      let responseData;
+      try {
+        responseData = JSON.parse(responseText);
+      } catch (e) {
+        // If not JSON, that's okay - Apps Script might return plain text
+        responseData = { success: true, message: responseText };
+      }
+
+      if (responseData.success === false) {
+        throw new Error(responseData.error || "Google Sheets submission failed");
+      }
+
+      console.log("✅ Google Sheets submission successful");
+      return { success: true, data: responseData };
     } catch (error) {
-      console.error("Google Sheets error:", error);
+      console.error("❌ Google Sheets error:", error);
+      console.error("Error details:", {
+        message: error.message,
+        stack: error.stack,
+        data: data,
+        url: url
+      });
       return { success: false, error: error.message };
     }
   };
@@ -122,6 +146,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Log Google Sheets result (non-blocking)
         if (!sheetsSuccess) {
           console.warn("Google Sheets submission failed, but Formspree succeeded");
+          if (sheetsResult.status === "rejected") {
+            console.error("Google Sheets rejection:", sheetsResult.reason);
+          } else if (sheetsResult.value) {
+            console.error("Google Sheets error:", sheetsResult.value.error);
+          }
+        } else {
+          console.log("✅ Successfully submitted to both Formspree and Google Sheets");
         }
 
         form.reset();
